@@ -1,7 +1,9 @@
 package fr.pepitorigolo.heritage
 
 import kotlin.math.PI
+import kotlin.math.sqrt
 
+// TODO: 10/08/2022 finir de mettre les commentaire pour la compréhension du chapitre
 fun main() {
     /**
      * Création d'une instance de SquareCabin qui vaut 6 residents et 50.0 de length
@@ -31,6 +33,11 @@ fun main() {
         println("Material: ${buildingMaterial}")
         println("Has room? ${hasRoom()}")
         println("Floor area: ${floorArea()}")
+        println("Has room? ${hasRoom()}")
+        getRoom()
+        println("Has room? ${hasRoom()}")
+        getRoom()
+        println("Carpet Length: ${calculateMaxCarpetLength()}")
     }
 
     with(roundTower) {
@@ -59,7 +66,20 @@ abstract class Dwelling(private var residents: Int) {
     //on doit implémentées dans l'une des sous classe cette méthode mtn
     abstract fun floorArea(): Double
 
+    /**
+     * Permet à un nouveau résident d'obtenir une chambre si la capacity de l'habitation est plus
+     * grande que le nombre de résidents déjà présent
+     */
+    fun getRoom() {
+        if (capacity > residents) {
+            residents++
+            println("Your got a room!")
+        } else {
+            println("Sorry, at capacity and no rooms left.")
+        }
+    }
 }
+
 
 /**
 *   Pour dire que SquareCabin herite de la classe parent Dwelling on utilise ":"
@@ -90,6 +110,10 @@ open class RoundHut(residents: Int, val radius: Double): Dwelling(residents) {
 
     override fun floorArea(): Double {
         return PI * radius * radius
+    }
+
+    fun calculateMaxCarpetLength(): Double{
+        return sqrt(2.0)*radius
     }
 }
 
